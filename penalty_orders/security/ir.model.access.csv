@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_penalty_rules_user,access_sale_penalty_rules_user,model_sale_penalty_rules,base.group_user,1,0,0,0
+access_sale_penalty_rules_manager,access_sale_penalty_rules_manager,model_sale_penalty_rules,sales_team.group_sale_manager,1,1,1,1
