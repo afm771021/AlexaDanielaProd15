@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_sale_loyalty" model="ir.ui.view">
+        <field name="name">sale.order.form.sale_return_products</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="pending_return_lines" invisible="1"/>
+                <button name="action_return_products" type="object" string="Return Products" icon="fa-reply-all" class="btn btn-primary" attrs="{'invisible': ['|', ('pending_return_lines', '=', False), ('state', 'in', ['sale', 'done', 'cancel'])]}">
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="Order Return Lines" name="return_lines">
+                    <field
+                        name="return_line"
+                        widget="section_and_note_one2many"
+                        mode="tree,kanban"
+                        attrs="{'readonly': [('state', 'in', ('done','cancel'))]}"
+                    >
+                        <form>
+                            <field name="product_id"
+                                domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                force_save="1"
+                                widget="many2one_barcode"
+                               />
+                        </form>
+                        <tree
+                            string="Sales Order Return Lines"
+                            editable="bottom"
+                            delete="false"
+                        >
+                            <control>
+                                <create name="add_product_control" string="Add a product"/>
+                            </control>
+                            <field
+                                name="product_id"
+                                force_save="1"
+                                domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                widget="product_configurator"
+                            />
+                            <field name="product_template_id"
+                                string="Product"
+                                invisible="1"
+                                domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                widget="product_configurator"/>
+                            <field name="name"
+                                force_save="1"
+                                invisible="1"
+                            />
+                            <field name="processed"
+                                attrs="{
+                                    'readonly': True,
+                                }"
+                            />
+                            <button name="unlink" icon="fa-trash-o" type="object" class="btn-secondary"
+                                    attrs="{'invisible': [('processed', '=', True)]}"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- catalogo comisiones Tree -->
+    <record model="ir.ui.view" id="ad_comisiones_tree">
+      <field name="name">AD_comisiones tree</field>
+      <field name="model">adcomisiones.adcomisiones</field>
+      <field name="arch" type="xml">
+        <tree string="comisiones" delete="false">
+          <field name="sale_level"/>
+          <field name="sale_criteria_type"/>
+          <field name="sale_min"/>
+          <field name="sale_max"/>
+          <field name="sale_commision_type"/>
+          <field name="sale_commision"/>
+          <field name="commision_status"/>
+        </tree>
+      </field>
+    </record>
+
+    <!--  catalogo comisiones  Formulario -->
+    <record id="ad_comisiones_form" model="ir.ui.view" >
+      <field name="name">AD_comisiones form</field>
+      <field name="model">adcomisiones.adcomisiones</field>
+      <field name="arch" type="xml">
+          <form string="comisiones" delete="false">
+            <sheet>
+              <group name="group_top">
+                <group name="group_left">
+                  <field name="sale_level"/>
+                  <field name="sale_min" />
+                  <field name="sale_max" />
+                  <field name="sale_criteria_type"/>
+                </group>
+                <group name="group_right">
+                    <field name="sale_commision_type"/>
+                   <field name="sale_commision"/>
+                   <field name="commision_status"/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- catalogo comisiones Action -->
+    <record model="ir.actions.act_window" id="ad_comisiones.action_server">
+      <field name="name">Catálogo</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">adcomisiones.adcomisiones</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Catálogo de comisiones</p>
+        <p>Click en 'CREAR' para añadir nuevos elementos</p>
+      </field>
+    </record>
+
+    <!-- generar comisiones Tree-->
+    <record model="ir.ui.view" id="ad_logcommissions_tree">
+          <field name="name">ad_commissiones tree</field>
+          <field name="model">adcomisiones.adgeneracomisiones</field>
+          <field name="arch" type="xml">
+            <tree string="ad_generacomisiones" edit="false" delete="false">
+              <field name="initDate"/>
+              <field name="endDate"/>
+              <field name="team_id"/>
+              <field name="logdate"/>
+              <field name="records"/>
+               <!-- <field name="logcomments"/> -->
+              <field name="commision_status"/>
+            </tree>
+          </field>
+        </record>
+
+    <!-- generar comisiones  Formulario -->
+    <record id="ab_logcommissions_form" model="ir.ui.view" >
+      <field name="name">ab_commissiones form</field>
+      <field name="model">adcomisiones.adgeneracomisiones</field>
+      <field name="arch" type="xml">
+          <form string="comisiones" edit="false" delete="false">
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" name="button_generar" type="object" icon="fa-play-circle" string ="Generar comisiones"
+                        attrs="{'invisible':[('commision_status','=',True)]}">
+                </button>
+              </div>
+              <group name="group_top">
+                <group name="group_left">
+                   <field name="initDate"/>
+                  <field name="endDate"/>
+                  <field name="team_id"/>
+                    <field name="records"/>
+                </group>
+                <group name="group_right">
+                   <field name="logdate"/>
+                   <field name="logcomments"/>
+                  <field name="commision_status"/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- generar comisiones Action-->
+    <record model="ir.actions.act_window" id="ad_comisiones.action_server1">
+      <field name="name">Genera comisiones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">adcomisiones.adgeneracomisiones</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Registros de Comisiones</p>
+        <p>Click en 'CREAR' para generar registros</p>
+      </field>
+    </record>
+
+    <!-- pay commissions Tree-->
+    <record model="ir.ui.view" id="ad_pay_commissions_tree">
+      <field name="name">ad_pay_commission tree</field>
+      <field name="model">adcommissions.commissionstopay</field>
+      <field name="arch" type="xml">
+        <tree string="pagocomisiones" create="false" edit="false" delete="false">
+          <header>
+            <button name="pay_commissions" string="Pagar comisiones" class="oe_highlight" type="object" />
+          </header>
+          <field name="sale_id"/>
+          <field name="guess_by"/>
+          <field name="team_id"/>
+          <field name="seller_level"/>
+          <field name="sale_amount"/>
+          <field name="amortization_amount"/>
+          <field name="commission"/>
+          <field name="commission_amount"/>
+          <field name="sale_date"/>
+          <field name="commision_status"/>
+          <field name="commission_pay_date"/>
+          <field name="commission_paid"/>
+        </tree>
+      </field>
+    </record>
+
+    <!--  pay commissions  Formulario-->
+    <record id="ad_pay_commissions_form" model="ir.ui.view" >
+      <field name="name">ad_pay_commission form</field>
+      <field name="model">adcommissions.commissionstopay</field>
+      <field name="arch" type="xml">
+          <form string="pagocomisiones" create="false" edit="false" delete="false"> <!-- edit="false" -->
+            <sheet>
+              <group name="group_top">
+                <group name="group_left">
+                   <field name="sale_id"/>
+                   <field name="guess_by" />
+                   <field name="team_id"/>
+                   <field name="sale_amount"/>
+                   <field name="amortization_amount"/>
+                   <field name="commission"/>
+                </group>
+                <group name="group_right">
+                   <field name="commission_amount"/>
+                   <field name="sale_date"/>
+                   <field name="commission_pay_date"/>
+                   <field name="commission_paid"/>
+                   <field name="commision_status"/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- pago comisiones Action-->
+    <record model="ir.actions.act_window" id="ad_comisiones.action_server2">
+      <field name="name">Pagos</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">adcommissions.commissionstopay</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Pago de comisiones</p>
+        <p>Click en 'CREAR' para añadir nuevos elementos</p>
+      </field>
+    </record>
+
+    <!-- orden de venta agregar el campo de estatus de pago de comisión-->
+    <record model="ir.ui.view" id="ad_comisiones_sale_order">
+      <field name="name">ad.comisiones.sale.order</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+       <field name="arch" type="xml">
+         <xpath expr="//field[@name='payment_term_id']" position="after">
+           <field name="commission_paid"/>
+         </xpath>
+           <xpath expr="//field[@name='commission_paid']" position="after">
+           <field name="pending_amount"/>
+         </xpath>
+       </field>
+    </record>
+
+    <record id="view_partner_form_ad_comisiones" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.ad_comisiones</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="action_partner_commission_history" icon="fa-trophy" groups="sales_team.group_sale_manager,sales_team.group_sale_salesman">
+                    <field name="commission_won" string="Comisiones" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+     <!-- contacto agregar el campo credito e invitado-->
+    <record model="ir.ui.view" id="ad_comisiones_res_partner">
+      <field name="name">ad.comisiones.res.partner</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+       <field name="arch" type="xml">
+         <xpath expr="//field[@name='vat']" position="after">
+           <field name="credit_amount"/>
+         </xpath>
+         <xpath expr="//field[@name='credit_amount']" position="after">
+           <field name="guess_by"/>
+         </xpath>
+        <xpath expr="//field[@name='guess_by']" position="after">
+            <field name="birthday"/>
+        </xpath>
+        <xpath expr="//field[@name='birthday']" position="after">
+            <field name="birthmonth"/>
+        </xpath>
+       </field>
+    </record>
+
+
+
+        <!-- factura agregar la venta de referencia -->
+    <record model="ir.ui.view" id="ad_comisiones_account_move_form">
+      <field name="name">ad.comisiones.account.move.form</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_move_form"/>
+       <field name="arch" type="xml">
+         <xpath expr="//field[@name='payment_reference']" position="after">
+           <field name="invoice_origin"/>
+         </xpath>
+       </field>
+    </record>
+
+    <menuitem name="AD Comisiones" id="ad_comisiones.menu_root" web_icon="ad_comisiones,static/description/icon.png"/>
+
+    <menuitem name="Menú" id="ad_comisiones.menu_1" parent="ad_comisiones.menu_root"/>
+
+    <menuitem name="Configuración"
+              id="ad_comisiones.configuracion"
+              parent="ad_comisiones.menu_root"/>
+
+    <menuitem name="Catálogo Comisiones"
+              id="ad_comisiones.menu_1_list"
+              parent="ad_comisiones.configuracion"
+              action="ad_comisiones.action_server"/>
+
+    <menuitem name="Generar Comisiones"
+              id="ad_comisiones.menu_2_list"
+              parent="ad_comisiones.menu_1"
+              action="ad_comisiones.action_server1"/>
+
+     <menuitem name="Pago Comisiones"
+              id="ad_comisiones.menu_3_list"
+              parent="ad_comisiones.menu_1"
+              action="ad_comisiones.action_server2" />
+
+</odoo>
