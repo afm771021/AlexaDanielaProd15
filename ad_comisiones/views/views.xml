@@ -226,6 +226,9 @@
         <xpath expr="//field[@name='birthday']" position="after">
             <field name="birthmonth"/>
         </xpath>
+        <xpath expr="//field[@name='birthmonth']" position="after">
+            <field name="team_id"/>
+        </xpath>
        </field>
     </record>
 

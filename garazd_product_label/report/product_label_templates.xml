@@ -2,37 +2,35 @@
 <odoo>
 
     <template id="label_57x35">
-        <table>
+        <table style="width: 100%; height: 100%;">
             <tr>
-                <td style="font-size: 6px; width: 50%">
+                <td style="font-size: 9px; width: 70px;">
                     <div>
                         <span t-field="label.product_id.name"/>
                     </div>
                     <div>
-                        <span t-if="label.product_id.product_template_attribute_value_ids"
+                        $ <span t-field="label.product_id.lst_price"/>
+                        <!--span t-if="label.product_id.product_template_attribute_value_ids"
                                t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids))"
-                               class="badge"/>
+                               class="badge"/-->
                     </div>
                 </td>
-                <td style="font-size: 6px; width: 50%" class="text-center">
-                    <div><span t-field="label.product_id.barcode"/></div>
-                    <div t-if="label.product_id.barcode" style="width: 100%; height: 13px; padding: 0 0px;">
+                <td style="font-size: 12px; width: 80px;" class="text-center">
+                    <div><!-- span t-field="label.product_id.barcode"/ --></div>
+                    <div t-if="label.product_id.barcode" style="width: 100%; height: 26px; padding: 0 0px;">
                         <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
-                        <t t-else="" t-set="show_code" t-value="0" />
+                        <t t-else="" t-set="show_code" t-value="0"/>
                         <img alt="Barcode" t-if="len(label.product_id.barcode) == 13"
                              t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN13', label.product_id.barcode, 600, 100, show_code)"
-                             style="overflow: hidden; width: 100%; height: 1rem;"
-                        />
+                             style="overflow: hidden; width: 100%; height: 1rem;"/>
                         <img alt="Barcode" t-elif="len(label.product_id.barcode) == 8"
                              t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN8', label.product_id.barcode, 600, 100, show_code)"
                              style="overflow: hidden; width: 100%; height: 1rem;"/>
                         <img alt="Barcode" t-else=""
                              t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.product_id.barcode, 600, 100, show_code)"
-                             style="overflow: hidden; width: 100%; height: 1rem;"
-                        />
+                             style="overflow: hidden; width: 100%; height: 1rem;"/>
                     </div>
                 </td>
-
             </tr>
         </table>
         <!--<table class="table" t-att-style="'border: {}'.format('%dpx solid #777;' % label.wizard_id.border_width if label.wizard_id.border_width else '0')">
